@@ -9,22 +9,57 @@ class KaryawanController extends Controller
     public function index(Request $request)
     {
     	if ($request->has('cari')) {
-    		$data_karyawan = \App\Karyawan::where('nama','LIKE','%' .$request->cari. '%')->get();
+    		$karyawan = \App\Karyawan::where('nama','LIKE','%' .$request->cari. '%')->get();
     	} else {
-    		$data_karyawan = \App\Karyawan::all();
+    		$karyawan = \App\Karyawan::all();
+            $uk = \App\Unitkerja::all();
     	}   	
     	 			//App = nameSpace dari kelas Karyawan
-    	return view('karyawan.index',['data_karyawan' => $data_karyawan]);
+    	return view('karyawan.index',['karyawan' => $karyawan, 'uk' => $uk]);
+    }
+
+    public function indexs(Request $request)
+    {
+        if ($request->has('cari')) {
+            $users = \App\Karyawan::where('nama','LIKE','%' .$request->cari. '%')->get();
+        } else {
+            $users = \App\Karyawan::all();
+        }       
+                    //App = nameSpace dari kelas Karyawan
+        return view('karyawan.index_users',['users' => $users]);
+    }
+
+    public function editdata($id)
+    {
+        $users = \App\Karyawan::find($id);
+
+        return view('karyawan/edit_users',['users' => $users]);                             
+    }
+
+    public function deletedata($id)
+    {
+        $users = \App\Karyawan::find($id);
+        $users->delete($users);
+        return redirect('/karyawan/index_users')->with('Sukses', 'Data Berhasil di Hapus');
+    }
+
+    public function updatedata(Request $request,$id)
+    {
+        $users = \App\Karyawan::find($id);
+        $users->update($request->all());
+
+        return redirect('/karyawan/index_users')->with('Sukses', 'Data Karyawan Berhasil di Update');
     }
 
     public function create(Request $request)
     {
         $this->validate($request, [
-            'nama_depan' => 'required|min:5' ,
+            'nama_depan' => 'required|min:4' ,
             'email' => 'required|email|unique:users',
             'jenis_kelamin' => 'required',
 
         ]);
+        
         //insert untuk tabel Users
         $user = new \App\User;
         $user->role = 'karyawan';
@@ -35,16 +70,35 @@ class KaryawanController extends Controller
         $user->save();
 
         //Insert untuk tabel Karyawan
+
         $request->request->add(['user_id' => $user->id ]);
         $karyawan = \App\Karyawan::create($request->all());
+
         return redirect('/karyawan')->with('Sukses', 'Data Berhasil Ditambahkan');
     }
 
     public function edit($id)
     {
-    	$karyawan = \App\Karyawan::find($id);  
+    	$karyawan = \App\Karyawan::find($id);
+
     	return view('karyawan/edit',['karyawan' => $karyawan]);								
     }
+
+        public function editUK($idUK)
+    {
+        $karyawanku = \App\Karyawan::find($idUK); 
+        $uk = \App\Unitkerja::all();
+
+        return view('karyawan/editUK',['karyawanku' => $karyawanku, 'uk' => $uk]);                                
+    }
+
+        public function updateUK(Request $request,$id)
+        {
+            $karyawanku = \App\Karyawan::find($id);
+            $karyawanku->update($request->all());
+
+            return redirect('/karyawan')->with('Sukses', 'Data UK Berhasil di Update');
+        }
 
     public function update(Request $request,$id)
     {
@@ -68,7 +122,7 @@ class KaryawanController extends Controller
     public function profile($id)
     {
         $karyawan = \App\Karyawan::find($id);
-        $keyindicator = \App\Kpi::all();;
+        $keyindicator = \App\Kpi::all();
 
 
     //menyiapkan data untuk chart

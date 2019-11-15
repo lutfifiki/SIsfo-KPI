@@ -2,10 +2,19 @@
 
 @section('content')
 
+    @if(session('Sukses'))
+        <div class="sufee-alert alert with-close alert-succes alert-dismissible fade show">
+                {{session('Sukses')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="content mt-3">
         <div class="animated fadeIn">
     	    <div class="row">
-  <!--                   <div class="col-md-6">
+                    <div class="col-md-6">
                         <section class="card">
                             <div class="twt-feed blue-bg">
                                 <div class="corner-ribon black-ribon">
@@ -56,21 +65,30 @@ Tambah Data
                             
                             </footer>
                         </section>
-                    </div>  -->
+                    </div> 
                   </div>
-
                     <div class="col-md-6">
                         <div id="chartNilai">
                                      
                         </div>                         
-                </div>
+                    </div>
 
                     <div class="col-md-6">
-                        <div id="chartPendapatan">
-                            
+                        <div id="KurvaPendapatan">                          
                         </div>
                     </div>    
+ 
+                    <div class="col-md-6">
+                        <br>
+                        <div id="ChartStack">  
+                        </div>
+                    </div> 
 
+                    <div class="col-md-6">
+                        <br>
+                        <div id="Chart4">  
+                        </div>
+                    </div> 
     	    </div>
     	</div>
     </div>
@@ -160,46 +178,146 @@ Tambah Data
             });
     </script>
     <script>
-        Highcharts.chart('chartPendapatan', {
-                chart: {
-                    type: 'bar'
-                },
+          Highcharts.chart('KurvaPendapatan', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+            },
+            xAxis: {
+                categories: {!!json_encode($categories)!!},
                 title: {
-                    text: 'Laporan Pendapatan Karyawan'
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'NIlai',
+                    align: 'high'
                 },
-                xAxis: {
-                    categories: {!!json_encode($categories)!!},
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Pendapatan (Rp)'
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
                     }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b> {point.y:.1f} </b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                    name: 'Target',
-                    data: {!!json_encode($standart)!!}
-
-                }, {
-                    name: 'Pendapatan',
-                    data: {!!json_encode($data)!!}
-
-                }]
-            });
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Target',
+                data: {!!json_encode($standart)!!}
+            }, {
+                name: 'Pendapatan',
+                data: {!!json_encode($data)!!}
+            }]
+});
+    </script>
+    <script>
+                Highcharts.chart('ChartStack', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Stacked bar chart'
+            },
+            xAxis: {
+                categories: {!!json_encode($categories)!!}
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total fruit consumption'
+                }
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: [{
+                name: 'Pendapatan',
+                data: {!!json_encode($data)!!}
+            }, {
+                name: 'Target',
+                data: {!!json_encode($standart)!!}
+            }]
+        });
+    </script>
+    <script>
+            Highcharts.chart('Chart4', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'Data Hasil'
+            ]
+        },
+        yAxis: [{
+            min: 0,
+            title: {
+                text: 'Nilai'
+            }
+        }, {
+            title: {
+                text: {!!json_encode($categories)!!}
+            },
+            opposite: true
+        }],
+        legend: {
+            shadow: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Target',
+            color: 'rgba(165,170,217,1)',
+            data: {!!json_encode($standart)!!}
+        }, {
+            name: 'Pendapatan',
+            color: 'rgba(126,86,134,.9)',
+            data: {!!json_encode($data)!!}
+        }]
+    });
     </script>
 @stop    

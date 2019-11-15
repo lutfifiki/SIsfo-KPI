@@ -8,7 +8,7 @@
 				<div class="col-lg-12">
 					<div class="card">
                         <div class="card-header">
-                            <strong>Edit</strong> Data Karyawan
+                            <strong>Edit</strong> Data Karyawan <strong>{{$karyawan->nama}}</strong>
                         </div>
                             <div class="card-body card-block">
 
@@ -19,15 +19,16 @@
                                     <label for="text-input" class=" form-control-label">Nama Depan</label>
                                 </div>
                                     <div class="col-12">
-                                        <input type="text" id="nama_depan" class="form-control" value="{{$karyawan->nama_depan}}">
+                                        <input type="text" id="nama_depan" name="nama_depan" class="form-control" value="{{$karyawan->nama_depan}}">
                                     </div>
-                            </div>    
+                            </div> 
+
 				     		<div class="row form-group">
                                 <div class="col col-md-12">
                                 	<label for="text-input" class=" form-control-label">Nama Lengkap</label>
                                 </div>
                                     <div class="col-12">
-                                    	<input type="text" id="nama" placeholder="Nama Lengkap" class="form-control" value="{{$karyawan->nama}}">
+                                    	<input type="text" id="nama" name="nama" placeholder="Nama Lengkap" class="form-control" value="{{$karyawan->nama}}">
                                     </div>
                             </div>
 
@@ -42,8 +43,26 @@
                                     	<option value="P" @if($karyawan->jenis_kelamin == 'P') selected @endif>Perempuan</option>
                                     </select>
                                 </div>
-                            </div>  
+                            </div> 
 
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <label for="text-input" class=" form-control-label">Tempat Lahir</label>
+                                </div>
+                                    <div class="col-12">
+                                        <input type="text" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" class="form-control" value="{{$karyawan->tempat_lahir}}">
+                                    </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <label for="text-input" class=" form-control-label">Tanggal Lahir</label>
+                                </div>
+                                    <div class="col-12">
+                                        <input type="date" id="ttl" name="ttl" placeholder="Tanggal Lahir" class="form-control" value="{{$karyawan->ttl}}">
+                                    </div>
+                            </div>
+                            
                             <div class="row form-group">
                             	<div class="col col-md-12">
                             		<label for="textarea-input" class=" form-control-label">Alamat</label>

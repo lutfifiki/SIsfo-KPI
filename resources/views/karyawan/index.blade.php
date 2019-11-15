@@ -2,36 +2,62 @@
 
 @section('content')
 
+	@if(session('Sukses'))
+        <div class="sufee-alert alert with-close alert-succes alert-dismissible fade show">
+                {{session('Sukses')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif   
+
 	<div class="content mt-3">
 		<div class="animated fadeIn">
 			<div class="row">
-				<iv class="col-lg-12">
+				<div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Data Karyawan UTSG</strong>
                                 <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">+ Tambah Data</button><br>
                             </div>
                             <div class="card-body">
-								<table class="table">
-				                        <thead class="thead-dark">
+								<table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+				                        <thead class="thead-dark" align="center">
 				                            <tr>
+				                            	<th scope="col">NO</th>
 				                                <th scope="col">ID PEGAWAI</th>
 				                                <th scope="col">NAMA</th>
 				                                <th scope="col">JENIS KELAMIN</th>
+				                                <th scope="col">TEMPAT LAHIR</th>
+				                                <th scope="col">TANGGAL LAHIR</th>
+				                                <th scope="col">UNIT KERJA</th>
 				                                <th scope="col">ALAMAT</th>
-				                                <th scope="col">AKSI</th>
+				                                <th scope="col">OPTION</th>
 				                            </tr>
-				                            @foreach($data_karyawan as $karyawan)
+				                             </thead>
+
+				                           <?php $no = 0;  ?>
+
+				                           @foreach($karyawan as $karyawan)
+
+				                           <?php $no++ ; ?>
+
 											<tr align="">
-												<td><a href="/karyawan/{{$karyawan->id}}/profile">{{$karyawan->id}}</a></td>
-												<td><a href="/karyawan/{{$karyawan->id}}/profile">{{$karyawan->nama}}</a></td>
-												<td>{{$karyawan->jenis_kelamin}}</td>
-												<td>{{$karyawan->alamat}}</td>
-												<td><a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+												<td align="center">{{$no}}</td>
+												<td align="center">UTSG-{{$karyawan->id}}</a></td>
+												<td>{{$karyawan->nama}}</a></td>
+												<td align="center">{{$karyawan->jenis_kelamin}}</td>
+												<td align="center">{{$karyawan->tempat_lahir}}</td>
+												<td align="center">{{$karyawan->ttl}}</td>
+												<td align="center"><a href="/unit_kerja/{{$karyawan->unitkerja->id}}/profile">{{$karyawan->unitkerja->nama}}</a></td>
+												<td align="center">{{$karyawan->alamat}}</td>
+												<td align="center"><a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+												<a href="/karyawan/{{$karyawan->id}}/editUK" class="btn btn-primary btn-sm">Edit UK</a>	
 												<a href="/karyawan/{{$karyawan->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Data Akan Dihapus?')">Hapus</a></td>
 											</tr>
+
 											@endforeach	
-				                        </thead>
+				                       
 				                    <tbody>
 				                            
 				                    </tbody>
@@ -61,14 +87,16 @@
 						   			 <input type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Nama Depan" value="{{old('nama_depan')}}">
 						   	@if($errors->has('nama_depan'))
 						   		<small class="help-block">{{$errors->first('nama_depan')}}</small>
-						   	@endif		 
+						   	@endif		
+
 						    	<br><label><b>Nama Lengkap</b></label>
 						   			 <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap" value="{{old('nama')}}">
 						   		<br><label><b>Email</b></label>
 						   			 <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{old('email')}}">
 						   	@if($errors->has('email'))
 						   		<small class="help-block">{{$errors->first('email')}}</small>
-						   	@endif		 	 
+						   	@endif	
+
 						   		<br><label for="exampleFormControlSelect1"><b>Jenis Kelamin</b></label>
 								    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
 								      <option>Jenis Kelamin</option>
@@ -77,9 +105,32 @@
 								    </select>
 							@if($errors->has('jenis_kelamin'))
 						   		<small class="help-block">{{$errors->first('jenis_kelamin')}}</small>
-						   	@endif		    
+						   	@endif	
+
+						   	<br><label><b>Tempat Lahir</b></label>
+						   		<input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" value="{{old('tempat_lahir')}}">
+						   	@if($errors->has('tempat_lahir'))
+						   		<small class="help-block">{{$errors->first('tempat_lahir')}}</small>
+						   	@endif	
+
+						   	<br><label><b>Tanggal Lahir</b></label>
+						   		<input type="date" name="ttl" class="form-control" id="ttl" placeholder="Tanggal Lahir" value="{{old('ttl')}}">
+						   	@if($errors->has('ttl'))
+						   		<small class="help-block">{{$errors->first('ttl')}}</small>	
+						   	@endif	
+
+						   	<br><label for="exampleFormControlSelect1"><b>Unit Kerja</b></label>
+								    <select class="form-control" name="unitkerja_id" id="unitkerja_id">
+								    	@foreach($uk as $unit)		
+								      <option value="{{$unit->id}}">{{$unit->nama}}</option>
+								      	@endforeach
+								    </select>
+
 						   		<br><label><b>Alamat</b></label>
-						   			 <textarea class="form-control" name="alamat" id="alamat" rows="3">{{old('alamat')}}</textarea>	 	 
+						   			 <textarea class="form-control" name="alamat" id="alamat" rows="3">{{old('alamat')}}</textarea>	
+						   	@if($errors->has('alamat'))
+						   		<small class="help-block">{{$errors->first('alamat')}}</small>	
+						   	@endif		 
 						  	</div>					      
 						</div>
 				      <div class="modal-footer">

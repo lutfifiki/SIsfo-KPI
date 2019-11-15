@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>United Tractors Semen Gresik</title>
+    <title>KPI UTSG Online</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,15 +31,14 @@
 
 </head>
 
-<body class="bg-dark">
-
+<body class="bg-UTSG">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="{{asset('admin/images/utsg.jpg')}}" alt="" width="200" height="100">
+                    <a href="#">
+                        <img class="align-content" src="{{asset('admin/images/utsg.png')}}" alt="" width="200" height="100">
                     </a>
                 </div>
 
@@ -59,15 +58,10 @@
                                     <label>
                                 <input type="checkbox"> Remember Me
                             </label>
-                                    <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
-                            </label>
+                        
 
                                 </div>
-                                <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                                <div class="register-link m-t-15 text-center">
-                                    <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                                </div>
+                                <button type="submit" class="btn btn-outline-warning btn-lg">Sign in</button>
                     </form>
                     
                 </div>
