@@ -17,8 +17,8 @@ class CreateAspekpenilaianTable extends Migration
             $table->bigIncrements('id');
             $table->UnsignedInteger('unitkerja_id');
             $table->string('nama');
-            $table->integer('plan');
-            $table->integer('pencapaian');
+            $table->nullableInteger('plan');
+            $table->nullableInteger('pencapaian');
             $table->rememberToken();
             $table->timestamps();
         });

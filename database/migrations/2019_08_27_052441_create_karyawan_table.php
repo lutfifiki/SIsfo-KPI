@@ -23,7 +23,7 @@ class CreateKaryawanTable extends Migration
             $table->string('tempat_lahir');
             $table->date('ttl');
             $table->string('alamat');
-            $table->string('avatar');
+            $table->nullableString('avatar');
             $table->rememberToken();
             $table->timestamps();
 
