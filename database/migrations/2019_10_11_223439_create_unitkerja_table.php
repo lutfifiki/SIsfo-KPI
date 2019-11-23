@@ -17,7 +17,6 @@ class CreateUnitkerjaTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('nama');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateKaryawanTable extends Migration
     public function up()
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('unitkerja_id');
             $table->string('nama_depan');
@@ -23,8 +23,7 @@ class CreateKaryawanTable extends Migration
             $table->string('tempat_lahir');
             $table->date('ttl');
             $table->string('alamat');
-            $table->nullableString('avatar');
-            $table->rememberToken();
+            $table->String('avatar')->nullable();
             $table->timestamps();
 
         });

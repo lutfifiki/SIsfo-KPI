@@ -77,6 +77,33 @@ class KaryawanController extends Controller
         return redirect('/karyawan')->with('Sukses', 'Data Berhasil Ditambahkan');
     }
 
+    public function createUsers(Request $request)
+    {
+        $this->validate($request, [
+        'nama_depan' => 'required|min:4' ,
+        'email' => 'required|email|unique:users',
+        'jenis_kelamin' => 'required',
+
+        ]);
+            //insert untuk tabel Users
+        $user = new \App\User;
+        $user->role = 'karyawan';
+        $user->name = $request->nama_depan;
+        $user->email = $request->email;
+        $user->password = bcrypt ('Abcd123');
+        $user->remember_token= str_random(60);
+        $user->save();
+
+        //Insert untuk tabel Karyawan
+
+        $request->request->add(['user_id' => $user->id ]);
+        $request->request->add(['unitkerja_id' => auth()->user()->unitkerja->id]);
+        $karyawan = \App\Karyawan::create($request->all());
+
+        return redirect('/karyawan/index_users')->with('Sukses', 'Data Berhasil Ditambahkan');
+
+    }
+
     public function edit($id)
     {
     	$karyawan = \App\Karyawan::find($id);

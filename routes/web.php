@@ -64,6 +64,7 @@ Route::get('/karyawan/index_users', 'KaryawanController@indexs' );
 Route::get('/karyawan/{id}/edit_users', 'KaryawanController@editdata');
 Route::post('karyawan/{id}/updatedata', 'KaryawanController@updatedata');
 Route::get('karyawan/{id}/deletedata', 'KaryawanController@deletedata');
+Route::post('karyawan/createUsers', 'KaryawanController@createUsers');
 });
 
 

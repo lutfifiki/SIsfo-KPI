@@ -64,9 +64,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-					<!-- Modal -->
-				<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	</div>					<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -77,21 +76,23 @@
 				      </div>
 				      <div class="modal-body">
 
-				        <form action="\karyawan\create" method="post">
+				        <form action="\karyawan\createUsers" method="post">
 				        	{{csrf_field()}}
 						  <div class="form-group{{$errors->has('nama_depan') ? ' has-error' : ''}}">
 						  		<label><b>Nama Depan</b></label>
 						   			 <input type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Nama Depan" value="{{old('nama_depan')}}">
 						   	@if($errors->has('nama_depan'))
 						   		<small class="help-block">{{$errors->first('nama_depan')}}</small>
-						   	@endif		 
+						   	@endif		
+
 						    	<br><label><b>Nama Lengkap</b></label>
 						   			 <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap" value="{{old('nama')}}">
 						   		<br><label><b>Email</b></label>
 						   			 <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{old('email')}}">
 						   	@if($errors->has('email'))
 						   		<small class="help-block">{{$errors->first('email')}}</small>
-						   	@endif		 	 
+						   	@endif	
+
 						   		<br><label for="exampleFormControlSelect1"><b>Jenis Kelamin</b></label>
 								    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
 								      <option>Jenis Kelamin</option>
@@ -100,9 +101,24 @@
 								    </select>
 							@if($errors->has('jenis_kelamin'))
 						   		<small class="help-block">{{$errors->first('jenis_kelamin')}}</small>
-						   	@endif		    
+						   	@endif	
+
+						   	<br><label><b>Tempat Lahir</b></label>
+						   		<input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" value="{{old('tempat_lahir')}}">
+						   	@if($errors->has('tempat_lahir'))
+						   		<small class="help-block">{{$errors->first('tempat_lahir')}}</small>
+						   	@endif	
+
+						   	<br><label><b>Tanggal Lahir</b></label>
+						   		<input type="date" name="ttl" class="form-control" id="ttl" placeholder="Tanggal Lahir" value="{{old('ttl')}}">
+						   	@if($errors->has('ttl'))
+						   		<small class="help-block">{{$errors->first('ttl')}}</small>	
+						   	@endif
 						   		<br><label><b>Alamat</b></label>
-						   			 <textarea class="form-control" name="alamat" id="alamat" rows="3">{{old('alamat')}}</textarea>	 	 
+						   			 <textarea class="form-control" name="alamat" id="alamat" rows="3">{{old('alamat')}}</textarea>	
+						   	@if($errors->has('alamat'))
+						   		<small class="help-block">{{$errors->first('alamat')}}</small>	
+						   	@endif		 
 						  	</div>					      
 						</div>
 				      <div class="modal-footer">
@@ -112,7 +128,7 @@
 				      </div>
 				     </form>
 				    </div>
-				  </div> --> <!-- /Modal -->
+				  </div> <!-- /Modal -->
 @stop		
 <!-- 
 @section('content1')		
@@ -120,6 +136,7 @@
 			<div class="alert alert-success" role="alert">
 				{{session('Sukses')}}
 			</div>
+
 		@endif	
 		<div class="row">
 
