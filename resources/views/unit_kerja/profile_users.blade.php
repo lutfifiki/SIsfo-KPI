@@ -54,6 +54,16 @@
 						</div>
 					</div>
 				</div>
+
+									<div class="col-md-6">
+                        <div id="chartNilai">      
+                        </div>                         
+                    </div>
+
+                    <div  class="col-md-6">
+                    	<div id="Chart2">
+                    
+                    	</div>
 			</div>
 		</div>
 	</div>
@@ -63,7 +73,126 @@
 @section('footer')
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 
-    
+    <script>
+	        Highcharts.chart('chartNilai', {
+	    chart: {
+	        type: 'column'
+	    },
+	    title: {
+	        text: 'Grafik Pencapaian Unit Kerja'
+	    },
+	    xAxis: {
+	        categories:  {!!json_encode($katagory)!!},
+	        crosshair: true
+	    },
+	    yAxis: {
+	        min: 0,
+	        title: {
+	            text: 'Persen (%)'
+	        }
+	    },
+	    tooltip: {
+	        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+	        footerFormat: '</table>',
+	        shared: true,
+	        useHTML: true
+	    },
+	    plotOptions: {
+	        column: {
+	            pointPadding: 0.2,
+	            borderWidth: 0
+	        }
+	    },
+	    series: [{
+	        name: 'Plan',
+	        data: {!!json_encode($rencana)!!}
+
+	    }, {
+	        name: 'Pencapaian',
+	        data: {!!json_encode($target)!!}
+
+	    }]
+	});
+    </script>
+
+    <script>
+    	Highcharts.chart('Chart2', {
+    chart: {
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'Grafik Pencapaian Unit Kerja'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: [{
+        categories: {!!json_encode($katagory)!!},
+        crosshair: true
+    }],
+    yAxis: [{ // Primary yAxis
+        labels: {
+            format: '{value}%',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        title: {
+            text: '',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        }
+    }, { // Secondary yAxis
+        title: {
+            text: 'Pencapaian',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        labels: {
+            format: '{value} %',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        x: 150,
+        verticalAlign: 'top',
+        y: 100,
+        floating: true,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || // theme
+            'rgba(255,255,255,0.25)'
+    },
+    series: [{
+        name: 'Pencapaian',
+        type: 'column',
+        yAxis: 1,
+        data: {!!json_encode($target)!!},
+        tooltip: {
+            valueSuffix: ' %'
+        }
+
+    }, {
+        name: 'Plan',
+        type: 'spline',
+        data: {!!json_encode($rencana)!!},
+        tooltip: {
+            valueSuffix: '%'
+        }
+    }]
+});	
+    </script>
 @stop	
 <!-- 
 @section('content1')		

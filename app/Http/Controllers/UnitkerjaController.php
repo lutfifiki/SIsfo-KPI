@@ -148,13 +148,20 @@ class UnitkerjaController extends Controller
     }
 
     public function profileus()
-    {
-        return view('unit_kerja/profile_users');
+    {   
+        $katagory = [];
+        $rencana = [];
+        $target = [];
+
+        foreach (auth()->user()->karyawan->unitkerja->aspekpenilaian as $sepek) {
+
+        $katagory[] = $sepek->nama;
+        $rencana[] = $sepek->plan;
+        $target[] = $sepek->pencapaian;    
+
     }
+        return view('unit_kerja/profile_users', ['katagory' => $katagory, 'rencana' => $rencana, 'target' => $target]);
 
 
-
-}
-    
-
-    
+    }
+}    

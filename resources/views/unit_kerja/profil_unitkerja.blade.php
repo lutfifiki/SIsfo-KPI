@@ -94,7 +94,7 @@
 
 						  <div class="form-group">		 
 						   		<label><b>Plan</label>
-						   			<input type="number" name="nilai" class="form-control" id="nilai" placeholder="Plan">
+						   			<input type="number" name="plan" class="form-control" id="plan" placeholder="Plan">
 						  	</div>
 
 						  <div class="form-group">
