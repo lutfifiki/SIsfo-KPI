@@ -12,11 +12,12 @@ class AspekpenilaianController extends Controller
     		$aspekpenilaian = \App\Aspekpenilaian::where('nama','LIKE','%' .$request->cari. '%')->get();
     	} else{
     		$aspekpenilaian = \App\Aspekpenilaian::all();
-            $unit = \App\Unitkerja::all();
-            // dd($unit);
+
+            $unitker = \App\Unitkerja::all();
+    
     	}	
-    	 			//App = nameSpace dari kelas Unit Kerja
-    	return view('aspek_penilaian.index',['aspekpenilaian' => $aspekpenilaian, 'unit' => '$unit']);
+    	 			//App = nameSpace dari kelas uk Kerja
+    	return view('aspek_penilaian.index',['aspekpenilaian' => $aspekpenilaian, 'unitker' => $unitker]);
     }
 
     public function create(Request $request)

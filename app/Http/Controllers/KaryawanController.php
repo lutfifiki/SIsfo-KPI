@@ -14,7 +14,7 @@ class KaryawanController extends Controller
     		$karyawan = \App\Karyawan::all();
             $uk = \App\Unitkerja::all();
     	}   	
-    	 			//App = nameSpace dari kelas Karyawan
+    	//App = nameSpace dari kelas Karyawan
     	return view('karyawan.index',['karyawan' => $karyawan, 'uk' => $uk]);
     }
 

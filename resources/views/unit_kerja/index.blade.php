@@ -91,31 +91,7 @@
 						   			@if($errors->has('email'))
 						   			 	<span class="help-block">{{$errors->first('email')}}</span>
 						   			 @endif
-						   	</div>
-						   	
-						   	<div class="form-group{{$errors->has('kode') ? ' has-error' : ''}}">		
-						    	<label for="exampleFormControlSelect1"><b>Kode UK</b></label>
-								    <select class="form-control" name="kode" id="kode">
-								      <option>Kode UK</option>
-								      <option value="AK-1"{{(old('kode') == 'AK-1') ? ' selected' : ''}}>AK-1 (Akuntansi)</option>
-								      <option value="SHE-2"{{(old('kode') == 'SHE-2') ? ' selected' : ''}}>SHE-2 (SHE)</option>
-								      <option value="KPG-3"{{(old('kode') == 'KPG-3') ? ' selected' : ''}}>KPG-3 (Kepegawaian)</option>
-								      <option value="TC-4"{{(old('kode') == 'TC-4') ? ' selected' : ''}}>TC-4 (Training Center)</option>
-								      <option value="PPC-5"{{(old('kode') == 'PPC-5') ? ' selected' : ''}}>PPC-5</option>
-								      <option value="GA-6"{{(old('kode') == 'GA-6') ? ' selected' : ''}}>GA-6 (General Affair)</option>
-								    </select>
-								    @if($errors->has('kode'))
-						   			 	<span class="help-block">{{$errors->first('kode')}}</span>
-						   			 @endif
-							</div>
-							
-							<div class="form-group{{$errors->has('jumlah') ? ' has-error' : ''}}">	    
-						   		<label><b>Jumlah Pegawai</b></label>
-						   			 <input type="number" name="jumlah" class="form-control" id="jumlah" placeholder="Jumlah">	
-						   		@if($errors->has('jumlah'))
-						   			 <span class="help-block">{{$errors->first('jumlah')}}</span>
-						   		@endif		  	 
-						  	</div>				      
+						   	</div>			      
 						</div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

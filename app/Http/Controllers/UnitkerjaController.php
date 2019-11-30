@@ -23,7 +23,6 @@ class UnitkerjaController extends Controller
         $this->validate($request, [
             'nama' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'kode' => 'required',
 
         ]);
         //insert untuk tabel Users
@@ -38,6 +37,7 @@ class UnitkerjaController extends Controller
         //Insert ke Table Unit Kerja  
         $request->request->add(['user_id' => $user->id ]);
         $unitkerja = \App\Unitkerja::create($request->all());
+
         return redirect('/unit_kerja')->with('Sukses', 'Data Berhasil Ditambahkan');
     }
 

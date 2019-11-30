@@ -3,11 +3,12 @@
 @section('content')
 
 	@if(session('Sukses'))
-        <div class="sufee-alert alert with-close alert-succes alert-dismissible fade show">
-                {{session('Sukses')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="content mt-3">
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    {{session('Sukses')}}
+                </div>
+            </div>
         </div>
     @endif   
 
@@ -141,32 +142,4 @@
 				     </form>
 				    </div>
 				  </div> <!-- /Modal -->
-@stop		
-<!-- 
-@section('content1')		
-		@if(session('Sukses'))
-			<div class="alert alert-success" role="alert">
-				{{session('Sukses')}}
-			</div>
-		@endif	
-		<div class="row">
-
-			<div class="col-12">
-				
-				<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
-				  + Tambah Data
-				</button>
-			</div>
-	<table class="table table-hover ">
-		<tr align="center">
-			<th>ID PEGAWAI</th>
-			<th>NAMA</th>
-			<th>JENIS KELAMIN</th>
-			<th>ALAMAT</th>
-			<th>AKSI</th>
-		</tr>
-
-	</table>	
-		</div>
-	</div>
-@endsection				   -->
+@stop	

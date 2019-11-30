@@ -3,14 +3,13 @@
 @section('content')
 
 	@if(session('Sukses'))
-        <div class="content mt-3">
-            <div class="col-sm-12">
-                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    {{session('Sukses')}}
-                </div>
-            </div>
+        <div class="sufee-alert alert with-close alert-succes alert-dismissible fade show">
+                {{session('Sukses')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    @endif   
+    @endif 
 
 	<div class="content mt-3">
 		<div class="animated fadeIn">
@@ -84,6 +83,15 @@
 						  		<label><b>Kategori</b></label>
 						   			<input type="text" name="nama" class="form-control" id="nama" placeholder="Kategori" value="{{old('nama')}}">  
 						  </div>
+
+						  	<div class="form-group">
+						  		<label for="exampleFormControlSelect1"><b>Unit Kerja</b></label>
+								    <select class="form-control" name="unitkerja_id" id="unitkerja_id">
+								    	@foreach($unitker as $unitke)		
+								      <option value="{{$unitke->id}}">{{$unitke->nama}}</option>
+								      	@endforeach
+								    </select>
+							</div>
 
 						  <div class="form-group">		 
 						   		<label><b>Plan</label>
